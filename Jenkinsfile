@@ -56,8 +56,7 @@ pipeline {
        stage ('Deploy') {
            steps {
                script{
-                   sh "kubectl apply -f service.yml"
-                   sh "kubectl apply -f deployment.yml"
+                   sh("kubectl get ns development || kubectl create ns development")
                }
            }
        }
