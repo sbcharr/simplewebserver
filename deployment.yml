@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ""
+          image: squeakysimple/k8scicd
           resources:
             requests:
               cpu: 10m
