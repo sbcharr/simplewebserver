@@ -1,5 +1,5 @@
 pipeline {
-   agent any
+   agent none
    environment {
        registry = "squeakysimple/k8scicd"
        GOCACHE = "/tmp"
@@ -8,7 +8,7 @@ pipeline {
        stage('Build') {
            agent {
                docker {
-                   image 'golang'
+                   image 'golang:latest'
                }
            }
            steps {
@@ -24,7 +24,7 @@ pipeline {
        stage('Test') {
            agent {
                docker {
-                   image 'golang'
+                   image 'golang:latest'
                }
            }
            steps {
