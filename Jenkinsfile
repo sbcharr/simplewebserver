@@ -56,7 +56,8 @@ pipeline {
        stage ('Deploy') {
            steps {
                script{
-                   sh("kubectl get ns development || kubectl create ns development")
+                   sh "microk8s kubectl apply -f service.yml"
+                   sh "microk8s kubectl apply -f deployment.yml"
                }
            }
        }
