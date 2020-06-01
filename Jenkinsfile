@@ -40,13 +40,13 @@ pipeline {
            }
        }
        stage('Publish') {
-           when { tag "release-*" }
+           when { tag "v*" }
            environment {
                registryCredential = 'dockerhub'
            }
            steps{
                script {
-                   def appimage = docker.build registry + ":$BUILD_NUMBER"
+                   def appimage = docker.build registry + ":$tag"
                    docker.withRegistry( '', registryCredential ) {
                        appimage.push()
                        appimage.push('latest')
