@@ -40,6 +40,8 @@ pipeline {
            }
        }
        stage('Publish') {
+           echo tag
+           echo $BUILD_NUMBER
            when { tag "v*" }
            environment {
                registryCredential = 'dockerhub'
