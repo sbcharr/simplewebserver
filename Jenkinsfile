@@ -28,8 +28,8 @@ pipeline {
                }
            }
            steps {
-               echo tag
                echo $BUILD_NUMBER
+               echo $TAG_NAME
                // Create our project directory.
                sh 'cd ${GOPATH}/src'
                sh 'mkdir -p ${GOPATH}/src/hello-world'
