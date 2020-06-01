@@ -40,6 +40,7 @@ pipeline {
            }
        }
        stage('Publish') {
+           when { tag "release-*" }
            environment {
                registryCredential = 'dockerhub'
            }
@@ -54,6 +55,7 @@ pipeline {
            }
        }
        stage ('Deploy') {
+           when { tag "release-*" }
            steps {
                script{
                    sh "microk8s kubectl apply -f service.yml"
