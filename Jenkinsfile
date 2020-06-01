@@ -28,7 +28,7 @@ pipeline {
                }
            }
            steps {
-               echo tags
+               echo tag
                echo $BUILD_NUMBER
                // Create our project directory.
                sh 'cd ${GOPATH}/src'
