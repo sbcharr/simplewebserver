@@ -55,7 +55,7 @@ pipeline {
            }
        }
        stage ('Deploy') {
-           when { tag "release-*" }
+           when { tag "v*" }
            steps {
                script{
                    sh "microk8s kubectl apply -f service.yml"
