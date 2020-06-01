@@ -28,8 +28,6 @@ pipeline {
                }
            }
            steps {
-               echo "${BUILD_NUMBER}"
-               echo "${TAG_NAME}"
                // Create our project directory.
                sh 'cd ${GOPATH}/src'
                sh 'mkdir -p ${GOPATH}/src/hello-world'
@@ -42,13 +40,12 @@ pipeline {
            }
        }
        stage('Publish') {
-           when { tag "v*" }
            environment {
                registryCredential = 'dockerhub'
            }
            steps{
                script {
-                   def appimage = docker.build registry + ":$tag"
+                   def appimage = docker.build registry + ":$BUILD_NUMBER"
                    docker.withRegistry( '', registryCredential ) {
                        appimage.push()
                        appimage.push('latest')
@@ -57,7 +54,6 @@ pipeline {
            }
        }
        stage ('Deploy') {
-           when { tag "v*" }
            steps {
                script{
                    sh "microk8s kubectl apply -f service.yml"
