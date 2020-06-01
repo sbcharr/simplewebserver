@@ -28,6 +28,8 @@ pipeline {
                }
            }
            steps {
+               echo tags
+               echo $BUILD_NUMBER
                // Create our project directory.
                sh 'cd ${GOPATH}/src'
                sh 'mkdir -p ${GOPATH}/src/hello-world'
@@ -40,8 +42,6 @@ pipeline {
            }
        }
        stage('Publish') {
-           echo tag
-           echo $BUILD_NUMBER
            when { tag "v*" }
            environment {
                registryCredential = 'dockerhub'
